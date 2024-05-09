@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 function AddBeerPage() {
   // State variables to store the values of the form inputs. You can leave these as they are.
@@ -21,7 +22,22 @@ function AddBeerPage() {
   const handleAttenuationLevel = (e) => setAttenuationLevel(e.target.value);
   const handleContributedBy = (e) => setContributedBy(e.target.value);
 
+  const [beer2, setBeer2] = useState([]);
 
+  const newBeer = {
+    name: name,
+    tagline: tagline,
+    description: description,
+    image_url: imageUrl,
+    first_brewed: firstBrewed,
+    brewers_tips: brewersTips,
+    attenuation_level: attenuationLevel,
+    contributed_by: contributedBy
+  };
+
+  axios.post( "https://ih-beers-api2.herokuapp.com/beers/new", newBeer);
+
+  
 
   // TASK:
   // 1. Create a function to handle the form submission and send the form data to the Beers API to create a new beer.
